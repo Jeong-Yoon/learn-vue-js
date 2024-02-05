@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 데이터 바인딩 -->
+        {{ str }}
+        <!-- 뷰 디렉티브: v- 가 붙는 특수한 속성들 -->
+        <p v-bind:id="uuid" v-bind:class="name">{{ num }}</p> <!-- 위 아래가 같은 값을 의미함 -->
+        <!-- <p id="abc1234">{{ num }}</p> -->
+        <!-- id라는 속성에는 data에서 관리하는 특정 data의 값이 연결이 된다 -->
+        <p>{{ doubleNum }}</p>
+        <div v-if="loading">
+            Loading... <!-- 로그인 전 로딩 상태 -->
+        </div>
+        <div v-else>
+            test user has been logged in <!-- 로그인 후 화면 -->
+        </div>
+        <div v-show="loading">
+            <!-- if는 DOM에서 완전히 지워버리는 것, show는 display none 처리 육안상으로만 안보이는 것 -->
+            Loading...
+        </div>
+        <!-- TODO: 인풋 박스를 만들고 입력된 값을 p 태그에 출력해보세요 -->
+        <input type="text" v-model="message">
+        <p>{{ message }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        
+        new Vue({
+            el: '#app',
+            data: {
+                str: 'hi',
+                num: 10,
+                uuid: 'abc1234',
+                name: 'text-blue',
+                loading: true,
+                message: ''
+            },
+            computed: {
+                doubleNum: function() {
+                    return this.num * 2; // data num 가리킴
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
