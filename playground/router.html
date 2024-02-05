@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <router-link to="/login">Login</router-link>
+            <router-link to="/main">Main</router-link>
+        </div>
+        <!-- 페이지 URL이 변경됐을 때 URL에 따라 뿌려지는 영역 -->
+        <router-view></router-view>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
+    <script>
+        var LoginComponent = {
+            template: '<div>login</div>'
+        }
+        var MainComponent = {
+            template: '<div>main</div>'
+        }
+
+        var router = new VueRouter({
+            // history라고 하는 문자열을 mode에 넣어주면 url에 #(해시)가 붙지 않는다.
+            mode: 'history',
+            // 페이지의 라우팅 정보가 들어가는 것: 어떤 URL로 이동했을 때 어떤 페이지가 뿌려질 지에 대한 정보 
+            // routes라는 속성은 배열 형태, 페이지 정보는 객체
+            routes: [
+                {
+                    // 페이지의 URL
+                    path: '/login',
+                    // 해당 URL에서 표시될 컴포넌트
+                    // 페이지마다 뿌려지는 컴포넌트는 1개
+                    component: LoginComponent
+                },
+                {
+                    //url은 main, 컴포넌트 이름은 MainComponent
+                    path: '/main',
+                    component: MainComponent
+                }
+            ]
+        });
+        
+        new Vue({
+            el: '#app',
+            router: router
+        });
+    </script>
+</body>
+</html>
